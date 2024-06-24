@@ -2,6 +2,8 @@ package com.banking.ibi.entities;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -27,11 +29,13 @@ public class UserEntity {
 	@Column(unique = true)
 	@Pattern(regexp = "[\\w]{3,20}")
 	private String username;
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private String password;
 	private String fname;
 	private String lname;
 	@Column(unique = true)
 	private String email;
+    private String role ; 
 	private int age; 
 	@OneToMany(fetch = FetchType.EAGER)
 	private Set<AccountEntity> accounts;

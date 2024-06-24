@@ -14,7 +14,11 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.banking.ibi.entities.UserEntity;
 import com.banking.ibi.exceptions.UserNotFound;
+import com.banking.ibi.models.LoginRequest;
+import com.banking.ibi.response.AuthResponse;
 import com.banking.ibi.services.UserServices;
+
+import jakarta.servlet.http.HttpServletResponse;
 
 @RestControllerAdvice
 @RestController
@@ -34,9 +38,13 @@ public class UserController {
 
 	
 	@PostMapping("/createUser")
-	public ResponseEntity<UserEntity> createUser(@RequestBody UserEntity userEntity){
+	public ResponseEntity<UserEntity> createUser(@RequestBody UserEntity userEntity) throws Exception{
 		return ResponseEntity.ok(userService.createUser(userEntity));
 	}
+	
+	@PostMapping("/signIn")
+    public ResponseEntity<ResponseEntity<AuthResponse>> signIn(@RequestBody LoginRequest userEntity, HttpServletResponse response) {
+		return  ResponseEntity.ok(userService.signIn(userEntity,response)); }
 	
 
 	@PostMapping("/updateUser")
