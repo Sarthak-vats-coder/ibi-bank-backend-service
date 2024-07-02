@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -22,62 +23,68 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 
-
 @Service
 public class UserServiceImpl implements UserServices {
-	
-	
-	
-	
+
 	AccountRepository accountRepository;
 	UserRepository userRepository;
 	PasswordEncoder passwordEncoder;
 
-	public UserServiceImpl(AccountRepository accountRepository,PasswordEncoder passwordEncoder, UserRepository userRepository) {
+	public UserServiceImpl(AccountRepository accountRepository, PasswordEncoder passwordEncoder,
+			UserRepository userRepository) {
 		this.accountRepository = accountRepository;
 		this.userRepository = userRepository;
-		this.passwordEncoder =passwordEncoder;
+		this.passwordEncoder = passwordEncoder;
 	}
 
 	@Override
 	public UserEntity createUser(@RequestBody UserEntity userEntity) throws Exception {
 		String username = userEntity.getUsername();
-		Optional<UserEntity> usernameExist = userRepository.findByUsername(username);		
+		Optional<UserEntity> usernameExist = userRepository.findByUsername(username);
 		if (usernameExist.isPresent() && usernameExist.get().getUsername() != null) {
-			throw new Exception("username Is Already Used With Another Account"+ usernameExist); 
+			throw new Exception("username Is Already Used With Another Account" + usernameExist);
 		}
 		UserEntity user = new UserEntity();
 		user.setUsername(userEntity.getUsername());
 		user.setFname(userEntity.getFname());
 		user.setLname(userEntity.getLname());
 		user.setEmail(userEntity.getEmail());
-		user.setAccounts(userEntity.getAccounts());
 		user.setAge(userEntity.getAge());
 		user.setPassword(passwordEncoder.encode(userEntity.getPassword()));
 		return userRepository.save(user);
 	}
-	
+
 	@Override
-    public ResponseEntity<AuthResponse> signIn(@RequestBody LoginRequest loginRequest, HttpServletResponse response) {  
-  
-        String token = JwtTokenProvider.generateToken(loginRequest); 
-        AuthResponse authResponse = new AuthResponse(); 
-        
-        
-        Cookie jwtCookie = new Cookie("authCookie", token);
-        jwtCookie.setDomain("localhost");
-        jwtCookie.setPath("/");
-        jwtCookie.setHttpOnly(true);
-        jwtCookie.setSecure(true);
-        jwtCookie.setMaxAge(24*3600);
-        
-        response.addCookie(jwtCookie);
-        authResponse.setMessage("Login success"); 
-        
-        
-  
-        return new ResponseEntity<>(authResponse,HttpStatus.OK); 
-    } 
+	public ResponseEntity<AuthResponse> signIn(@RequestBody LoginRequest loginRequest, HttpServletResponse response)
+			throws UserNotFound {
+
+		String username = loginRequest.getUsername();
+		UserEntity user = findUserByUsername(username);
+		String UserPassword = user.getPassword();
+		String password = loginRequest.getPassword();
+
+		if (user != null && passwordEncoder.matches(password, UserPassword)) {
+
+			String token = JwtTokenProvider.generateToken(loginRequest);
+			
+			AuthResponse authResponse = new AuthResponse();
+
+			Cookie jwtCookie = new Cookie("authCookie", token);
+			jwtCookie.setDomain("localhost");
+			jwtCookie.setPath("/");
+			jwtCookie.setHttpOnly(true);
+			jwtCookie.setSecure(true);
+			jwtCookie.setMaxAge(24 * 3600);
+
+			response.addCookie(jwtCookie);
+			authResponse.setMessage("success");
+			authResponse.setJwt(token);
+
+			return new ResponseEntity<>(authResponse, HttpStatus.OK);
+		}
+
+		return new ResponseEntity<>(HttpStatus.ALREADY_REPORTED);
+	}
 
 	@Override
 	public UserEntity updateUser(UserEntity userEntity) throws UserNotFound {
@@ -149,5 +156,5 @@ public class UserServiceImpl implements UserServices {
 	public List<UserEntity> getAllUser() {
 		return userRepository.findAll();
 	}
-	
+
 }

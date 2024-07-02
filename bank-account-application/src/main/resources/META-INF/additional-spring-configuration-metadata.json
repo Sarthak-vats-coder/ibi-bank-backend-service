@@ -1,74 +1,82 @@
-{
-	"properties": [
-		{
-			"name": "spring.sarthak.mysql.username",
-			"type": "java.lang.String",
-			"description": "A description for 'spring.sarthak.mysql.username'"
-		},
-		{
-			"name": "spring.sarthak.mysql.password",
-			"type": "java.lang.String",
-			"description": "A description for 'spring.sarthak.mysql.password'"
-		},
-		{
-			"name": "spring.sarthak.mysql.url",
-			"type": "java.lang.String",
-			"description": "A description for 'spring.sarthak.mysql.url'"
-		},
-		{
-			"name": "spring.security.filter.chain.content-negotiation.parameter-strategy",
-			"type": "java.lang.String",
-			"description": "A description for 'spring.security.filter.chain.content-negotiation.parameter-strategy'"
-		},
-		{
-			"name": "spring.security.filter.chain.any-request.authorized",
-			"type": "java.lang.String",
-			"description": "A description for 'spring.security.filter.chain.any-request.authorized'"
-		},
-		{
-			"name": "spring.security.filter.chain.request-matcher.path.pattern",
-			"type": "java.lang.String",
-			"description": "A description for 'spring.security.filter.chain.request-matcher.path.pattern'"
-		},
-		{
-			"name": "spring.security.filter.chain.request-matcher.path.authenticated",
-			"type": "java.lang.String",
-			"description": "A description for 'spring.security.filter.chain.request-matcher.path.authenticated'"
-		},
-		{
-			"name": "spring.security.csrf.disabled",
-			"type": "java.lang.String",
-			"description": "A description for 'spring.security.csrf.disabled'"
-		},
-		{
-			"name": "spring.security.cors.configurationSource.allowedOrigins",
-			"type": "java.lang.String",
-			"description": "A description for 'spring.security.cors.configurationSource.allowedOrigins '"
-		},
-		{
-			"name": "spring.security.cors.configurationSource.allowedMethods",
-			"type": "java.lang.String",
-			"description": "A description for 'spring.security.cors.configurationSource.allowedMethods'"
-		},
-		{
-			"name": "spring.security.cors.configurationSource.allowedHeaders",
-			"type": "java.lang.String",
-			"description": "A description for 'spring.security.cors.configurationSource.allowedHeaders'"
-		},
-		{
-			"name": "spring.security.cors.configurationSource.allowCredentials",
-			"type": "java.lang.String",
-			"description": "A description for 'spring.security.cors.configurationSource.allowCredentials'"
-		},
-		{
-			"name": "spring.security.cors.configurationSource.exposedHeaders",
-			"type": "java.lang.String",
-			"description": "A description for 'spring.security.cors.configurationSource.exposedHeaders'"
-		},
-		{
-			"name": "spring.security.cors.configurationSource.maxAge",
-			"type": "java.lang.String",
-			"description": "A description for 'spring.security.cors.configurationSource.maxAge'"
-		}
-	]
-}
+{"properties": [
+  {
+    "name": "spring.sarthak.mysql.username",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.sarthak.mysql.username'"
+  },
+  {
+    "name": "spring.sarthak.mysql.password",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.sarthak.mysql.password'"
+  },
+  {
+    "name": "spring.sarthak.mysql.url",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.sarthak.mysql.url'"
+  },
+  {
+    "name": "spring.security.filter.chain.content-negotiation.parameter-strategy",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.security.filter.chain.content-negotiation.parameter-strategy'"
+  },
+  {
+    "name": "spring.security.filter.chain.any-request.authorized",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.security.filter.chain.any-request.authorized'"
+  },
+  {
+    "name": "spring.security.filter.chain.request-matcher.path.pattern",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.security.filter.chain.request-matcher.path.pattern'"
+  },
+  {
+    "name": "spring.security.filter.chain.request-matcher.path.authenticated",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.security.filter.chain.request-matcher.path.authenticated'"
+  },
+  {
+    "name": "spring.security.csrf.disabled",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.security.csrf.disabled'"
+  },
+  {
+    "name": "spring.security.cors.configurationSource.allowedOrigins",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.security.cors.configurationSource.allowedOrigins '"
+  },
+  {
+    "name": "spring.security.cors.configurationSource.allowedMethods",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.security.cors.configurationSource.allowedMethods'"
+  },
+  {
+    "name": "spring.security.cors.configurationSource.allowedHeaders",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.security.cors.configurationSource.allowedHeaders'"
+  },
+  {
+    "name": "spring.security.cors.configurationSource.allowCredentials",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.security.cors.configurationSource.allowCredentials'"
+  },
+  {
+    "name": "spring.security.cors.configurationSource.exposedHeaders",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.security.cors.configurationSource.exposedHeaders'"
+  },
+  {
+    "name": "spring.security.cors.configurationSource.maxAge",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.security.cors.configurationSource.maxAge'"
+  },
+  {
+    "name": "security.jwt.secret-key",
+    "type": "java.lang.String",
+    "description": "A description for 'security.jwt.secret-key'"
+  },
+  {
+    "name": "security.jwt.expiration-time",
+    "type": "java.lang.String",
+    "description": "A description for 'security.jwt.expiration-time'"
+  }
+]}

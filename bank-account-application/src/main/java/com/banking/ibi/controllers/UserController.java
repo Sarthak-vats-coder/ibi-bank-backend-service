@@ -43,7 +43,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/signIn")
-    public ResponseEntity<ResponseEntity<AuthResponse>> signIn(@RequestBody LoginRequest userEntity, HttpServletResponse response) {
+    public ResponseEntity<ResponseEntity<AuthResponse>> signIn(@RequestBody LoginRequest userEntity, HttpServletResponse response) throws UserNotFound {
 		return  ResponseEntity.ok(userService.signIn(userEntity,response)); }
 	
 

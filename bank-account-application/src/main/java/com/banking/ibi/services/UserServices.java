@@ -28,5 +28,5 @@ public interface UserServices {
 	UserEntity findUserByEmailAddress(String email) throws UserNotFound;
 
 	List<UserEntity> getAllUser();
-	ResponseEntity<AuthResponse> signIn(LoginRequest userEntity, HttpServletResponse response);
+	ResponseEntity<AuthResponse> signIn(LoginRequest userEntity, HttpServletResponse response) throws UserNotFound;
 }
