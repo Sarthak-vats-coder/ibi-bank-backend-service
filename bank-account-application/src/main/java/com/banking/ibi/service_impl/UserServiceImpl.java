@@ -76,13 +76,13 @@ public class UserServiceImpl implements UserServices {
 
 			AuthResponse authResponse = new AuthResponse();
 
-			Cookie jwtCookie = new Cookie("authCookie", token);
+			Cookie jwtCookie = new Cookie("auth_token", token);
 			jwtCookie.setDomain("localhost");
 			jwtCookie.setPath("/");
 			jwtCookie.setMaxAge(24 * 3600);
-			jwtCookie.setAttribute("SameSite", "None");
+			jwtCookie.setAttribute("SameSite", "Lax");
 			jwtCookie.setSecure(false);
-			jwtCookie.setHttpOnly(true);
+			jwtCookie.setHttpOnly(false);
 
 			response.addCookie(jwtCookie);
 

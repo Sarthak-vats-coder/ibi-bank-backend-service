@@ -8,7 +8,7 @@ import UserDashboard from "./Components/UserDashboard/UserDashboard";
 import axios from "axios";
 
 const App = () => {
-  axios.default.withCredentials = true;
+  axios.defaults.withCredentials = true;
   axios.defaults.baseURL = "http://localhost:1025";
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");

@@ -7,16 +7,10 @@ const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  var body = {
-    username: username,
-    password: password,
-  };
-
   const submitLoginRequest = (event) => {
-    axios({
-      method: "post",
-      url: "banking-service/user-service/user/signIn",
-      data: body,
+    axios.post("banking-service/user-service/user/signIn", {
+      username: username,
+      password: password,
     }).then(
       (data) => console.log(data),
       (error) => console.log(error)
