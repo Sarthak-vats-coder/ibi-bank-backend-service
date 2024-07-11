@@ -1,0 +1,66 @@
+.main-LoginForm {
+  position: absolute;
+  top: 20%;
+  right: 40%;
+  height: auto;
+  width: 420px;
+  color: aliceblue;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 30px 40px;
+  box-shadow: 0 0 10px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(30px);
+}
+
+.main-LoginForm .userInput {
+  width: 100%;
+  height: 50px;
+  position: relative;
+  margin-top: 30px;
+}
+
+.userInput input::placeholder {
+  color: white;
+}
+
+.userInput .icon {
+  position: absolute;
+  right: 20px;
+  top: 35%;
+  font-size: 15px;
+  transform: translate(-50%);
+}
+
+.forgotPassword {
+  font-size: 15px;
+  margin-top: 10px;
+  justify-content: space-between;
+  text-align: end;
+}
+
+.rememberMe label input {
+  margin-right: 5px;
+}
+
+.main-LoginForm button {
+  left: 10%;
+  position: relative;
+  width: 80%;
+  height: 50px;
+  border: none;
+  outline: none;
+  border-radius: 50px;
+  margin-top: 15px;
+  cursor: pointer;
+  box-shadow: 0 0 5px black;
+  font-size: 18px;
+  font-weight: 700;
+  color: black;
+}
+
+.main-LoginForm .register {
+  margin-top: 10px;
+  margin-left: 15%;
+  text-align: center;
+}

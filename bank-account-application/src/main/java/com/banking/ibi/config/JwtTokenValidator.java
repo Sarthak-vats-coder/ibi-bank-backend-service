@@ -19,6 +19,7 @@ import com.banking.ibi.services.UserServices;
 import io.micrometer.common.lang.NonNull;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -36,18 +37,28 @@ public class JwtTokenValidator extends OncePerRequestFilter {
 		this.userRepository = userRepository;
 
 	}
+	
+	private Cookie getAuthCookie(HttpServletRequest request) {
+		if(request==null || request.getCookies().length==0 || request.getCookies()[0].getValue()== null) return null;
+		Cookie[] cookies = request.getCookies();
+		for(Cookie cookie : cookies) {
+			if(cookie.getName().equals("auth_token")) return cookie;
+		}
+		return null;
+	}
 
 	@Override
 	protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response,
 			@NonNull FilterChain filterChain) throws ServletException, IOException {
 		
-
-		if (request.getCookies() == null|| request.getCookies().length==0||request.getCookies()[0].getValue()== null) {
+		Cookie authCookie = getAuthCookie(request);
+		
+		if(authCookie==null) {
 			filterChain.doFilter(request, response);
 			return;
 		}
 		
-		final String jwt = request.getCookies()[0].getValue();
+		final String jwt = authCookie.getValue();
 		String username = JwtTokenProvider.getUsernameFromJwTOken(jwt);
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		
