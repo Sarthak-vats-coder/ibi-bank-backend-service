@@ -1,13 +1,11 @@
 package com.banking.ibi.entities;
 
-import java.lang.foreign.ValueLayout.OfBoolean;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -30,6 +28,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserEntity implements UserDetails {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4983704276006987148L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long userId;

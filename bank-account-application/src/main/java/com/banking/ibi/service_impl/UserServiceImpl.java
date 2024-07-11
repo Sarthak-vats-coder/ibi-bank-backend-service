@@ -5,7 +5,9 @@ import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -50,6 +52,8 @@ public class UserServiceImpl implements UserServices {
 		user.setLname(userEntity.getLname());
 		user.setEmail(userEntity.getEmail());
 		user.setAge(userEntity.getAge());
+		user.setRole(userEntity.getRole());
+		user.setAccounts(userEntity.getAccounts());
 		user.setPassword(passwordEncoder.encode(userEntity.getPassword()));
 		return userRepository.save(user);
 	}
@@ -60,30 +64,38 @@ public class UserServiceImpl implements UserServices {
 
 		String username = loginRequest.getUsername();
 		UserEntity user = findUserByUsername(username);
-		String UserPassword = user.getPassword();
+		String userPassword = user.getPassword();
 		String password = loginRequest.getPassword();
+		
+		Authentication authentication = new UsernamePasswordAuthenticationToken(username, password);
+        SecurityContextHolder.getContext().setAuthentication(authentication); 
 
-		if (user != null && passwordEncoder.matches(password, UserPassword)) {
+
+		if (user != null && passwordEncoder.matches(password, userPassword)) {
 
 			String token = JwtTokenProvider.generateToken(loginRequest);
 			
 			AuthResponse authResponse = new AuthResponse();
 
-			Cookie jwtCookie = new Cookie("authCookie", token);
-			jwtCookie.setDomain("localhost");
-			jwtCookie.setPath("/");
-			jwtCookie.setHttpOnly(true);
-			jwtCookie.setSecure(true);
-			jwtCookie.setMaxAge(24 * 3600);
 
+			
+			Cookie jwtCookie = new Cookie("authCookie", token);
+			jwtCookie.setDomain("127.0.0.1");
+			jwtCookie.setPath("/");
+			jwtCookie.setMaxAge(24 * 3600);
+			jwtCookie.setAttribute("SameSite","None");
+			jwtCookie.setSecure(false);
+			jwtCookie.setHttpOnly(true);
+			
 			response.addCookie(jwtCookie);
+			
 			authResponse.setMessage("success");
 			authResponse.setJwt(token);
 
 			return new ResponseEntity<>(authResponse, HttpStatus.OK);
 		}
 
-		return new ResponseEntity<>(HttpStatus.ALREADY_REPORTED);
+		return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 	}
 
 	@Override

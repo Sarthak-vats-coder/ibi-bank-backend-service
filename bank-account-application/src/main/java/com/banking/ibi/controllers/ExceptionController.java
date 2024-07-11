@@ -27,13 +27,13 @@ public class ExceptionController {
 
 	}
 	
-//	@ExceptionHandler(value= {NoSuchElementException.class})
-//	public ResponseEntity<ErrorResponse> handleNoElemetFound(Exception ex) {
-//		return new ResponseEntity<>(
-//				new ErrorResponse("No element found", "Please check if it was saved correctly"),
-//				HttpStatus.BAD_REQUEST);
-//
-//	}
+	@ExceptionHandler(value= {NoSuchElementException.class})
+	public ResponseEntity<ErrorResponse> handleNoElemetFound(Exception ex) {
+		return new ResponseEntity<>(
+				new ErrorResponse("No element found", "Please check if it was saved correctly"),
+				HttpStatus.BAD_REQUEST);
+
+	}
 	
 	@ExceptionHandler(value = {ConstraintViolationException.class})
 	public ResponseEntity<ErrorResponse> handleValidationErrors(ConstraintViolationException exception){
