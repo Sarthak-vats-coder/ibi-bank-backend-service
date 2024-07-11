@@ -1,0 +1,13 @@
+.main-dashboard {
+  position: absolute;
+  right: 40%;
+  top: 5%;
+  color: "white";
+  width: 420px;
+  height: auto;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  padding: 10px;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(30px);
+}

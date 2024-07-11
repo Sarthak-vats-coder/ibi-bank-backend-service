@@ -66,29 +66,26 @@ public class UserServiceImpl implements UserServices {
 		UserEntity user = findUserByUsername(username);
 		String userPassword = user.getPassword();
 		String password = loginRequest.getPassword();
-		
-		Authentication authentication = new UsernamePasswordAuthenticationToken(username, password);
-        SecurityContextHolder.getContext().setAuthentication(authentication); 
 
+		Authentication authentication = new UsernamePasswordAuthenticationToken(username, password);
+		SecurityContextHolder.getContext().setAuthentication(authentication);
 
 		if (user != null && passwordEncoder.matches(password, userPassword)) {
 
 			String token = JwtTokenProvider.generateToken(loginRequest);
-			
+
 			AuthResponse authResponse = new AuthResponse();
 
-
-			
 			Cookie jwtCookie = new Cookie("authCookie", token);
-			jwtCookie.setDomain("127.0.0.1");
+			jwtCookie.setDomain("localhost");
 			jwtCookie.setPath("/");
 			jwtCookie.setMaxAge(24 * 3600);
-			jwtCookie.setAttribute("SameSite","None");
+			jwtCookie.setAttribute("SameSite", "None");
 			jwtCookie.setSecure(false);
 			jwtCookie.setHttpOnly(true);
-			
+
 			response.addCookie(jwtCookie);
-			
+
 			authResponse.setMessage("success");
 			authResponse.setJwt(token);
 
